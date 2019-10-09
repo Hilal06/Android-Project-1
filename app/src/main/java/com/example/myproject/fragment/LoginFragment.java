@@ -1,7 +1,6 @@
 package com.example.myproject.fragment;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -16,6 +15,8 @@ import android.widget.Toast;
 
 import com.example.myproject.R;
 import com.example.myproject.model.User;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -39,6 +40,9 @@ public class LoginFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
         final EditText username = view.findViewById(R.id.txtEmail);
         final EditText password = view.findViewById(R.id.txtPassword);
+        final ArrayList<User> listUser = new ArrayList<User>();
+        listUser.add(new User("Rifaul", "Rifaul"));
+        listUser.add(new User("paul","paul"));
 
         Button btnSignIn = view.findViewById(R.id.btnLogin);
         btnSignIn.setOnClickListener(new View.OnClickListener() {
@@ -47,17 +51,23 @@ public class LoginFragment extends Fragment {
                 if (mListener != null) {
                     String usr = username.getText().toString();
                     String pass = password.getText().toString();
-                    User user = new User();
 
                     if (!TextUtils.isEmpty(usr) && !TextUtils.isEmpty(pass)) {
-                        if (usr.equals(user.getUsername()) || usr.equals(user.getEmail()) && pass.equals(user.getPassword())) {
-                            // Todo after login
-
-                        } else {
-                            Toast.makeText(getActivity(), "Invalid Username and Password", Toast.LENGTH_SHORT).show();
+                        boolean cek = false;
+                        for (int i=0; i<listUser.size(); i++) {
+                            if (listUser.get(i).getUsername().equals(usr) && listUser.get(i).getPassword().equals(pass)) {
+                                Toast.makeText(getActivity(), "Welcome "+listUser.get(i).getUsername(), Toast.LENGTH_SHORT).show();
+                                cek = false;
+                            } else {
+                                cek = true;
+                            }
                         }
+                        if (cek) {
+                            Toast.makeText(getActivity(), "Please check your account!!", Toast.LENGTH_SHORT).show();
+                        }
+
                     } else {
-                        Toast.makeText(getActivity(), "PLease Enter Your Username/email and Password", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Please Enter Your Username and Password", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -95,6 +105,5 @@ public class LoginFragment extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
     }
 }

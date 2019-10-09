@@ -10,12 +10,9 @@ public class User {
     public User() {
     }
 
-    public User(String username, String password, String email, String gender, String tlp) {
+    public User(String username, String password) {
         this.username = username;
         this.password = password;
-        this.email = email;
-        this.gender = gender;
-        this.tlp = tlp;
     }
 
     public String getUsername() {

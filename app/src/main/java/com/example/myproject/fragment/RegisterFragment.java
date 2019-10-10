@@ -5,54 +5,41 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
 import com.example.myproject.R;
-import com.example.myproject.model.CustomAdapter;
-import com.example.myproject.model.Item;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.zip.Inflater;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link ItemListFragment.OnFragmentInteractionListener} interface
+ * {@link RegisterFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
  */
-public class ItemListFragment extends Fragment {
+public class RegisterFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
-    private ListView listItem;
-    private ArrayList data = new ArrayList<Item>();
 
-    public ItemListFragment() {
+    public RegisterFragment() {
         // Required empty public constructor
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_item_list, container, false);
-        listItem = view.findViewById(R.id.listItem);
-        data.add(new Item(1, "Nike", "133132", 12));
-        data.add(new Item(2, "Laptop", "198032", 8));
-        data.add(new Item(3, "Pencil", "736389", 50));
-
-        CustomAdapter customAdapter = new CustomAdapter(getContext(), data);
-        listItem.setAdapter(customAdapter);
-        return view;
+        return inflater.inflate(R.layout.fragment_register, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
+    public void onButtonPressed(Uri uri) {
+        if (mListener != null) {
+            mListener.onFragmentInteraction(uri);
+        }
+    }
 
     @Override
     public void onAttach(Context context) {

@@ -27,6 +27,7 @@ import java.util.ArrayList;
 public class LoginFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
+    private ItemListFragment listFragment;
 
     public LoginFragment() {
         // Required empty public constructor
@@ -56,7 +57,7 @@ public class LoginFragment extends Fragment {
                         boolean cek = false;
                         for (int i=0; i<listUser.size(); i++) {
                             if (listUser.get(i).getUsername().equals(usr) && listUser.get(i).getPassword().equals(pass)) {
-                                Toast.makeText(getActivity(), "Welcome "+listUser.get(i).getUsername(), Toast.LENGTH_SHORT).show();
+                                mListener.btnLoginClicked();
                                 cek = false;
                             } else {
                                 cek = true;
@@ -104,6 +105,6 @@ public class LoginFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
+        void btnLoginClicked();
     }
 }

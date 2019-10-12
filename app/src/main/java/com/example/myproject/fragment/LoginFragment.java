@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.myproject.R;
+import com.example.myproject.model.Item;
 import com.example.myproject.model.User;
 
 import java.util.ArrayList;
@@ -41,6 +42,8 @@ public class LoginFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
         final EditText username = view.findViewById(R.id.txtEmail);
         final EditText password = view.findViewById(R.id.txtPassword);
+
+        // hardcode data user
         final ArrayList<User> listUser = new ArrayList<User>();
         listUser.add(new User("Rifaul", "Rifaul"));
         listUser.add(new User("paul","paul"));

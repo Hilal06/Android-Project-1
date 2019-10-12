@@ -4,22 +4,23 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.fragment.app.ListFragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.myproject.R;
 import com.example.myproject.model.CustomAdapter;
 import com.example.myproject.model.Item;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.zip.Inflater;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,12 +28,9 @@ import java.util.zip.Inflater;
  * {@link ItemListFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
  */
-public class ItemListFragment extends Fragment {
+public class ItemListFragment extends Fragment{
 
     private OnFragmentInteractionListener mListener;
-    private ListView listItem;
-    private ArrayList data = new ArrayList<Item>();
-
     public ItemListFragment() {
         // Required empty public constructor
     }
@@ -42,14 +40,27 @@ public class ItemListFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_item_list, container, false);
-        listItem = view.findViewById(R.id.listItem);
-        data.add(new Item(1, "Nike", "133132", 12));
-        data.add(new Item(2, "Laptop", "198032", 8));
-        data.add(new Item(3, "Pencil", "736389", 50));
+        ListView listItem = view.findViewById(R.id.list);
 
-        CustomAdapter customAdapter = new CustomAdapter(getContext(), data);
+        final int[] idItem = {1,2,3};
+        final String[] name = {"Nike", "Laptop", "Pencil"};
+        final String[] code = {"16266", "616244", "72654"};
+        final String[] stock = {"13", "4", "50"};
+
+        CustomAdapter customAdapter = new CustomAdapter(this.getContext(), idItem, name, code, stock);
         listItem.setAdapter(customAdapter);
+        listItem.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Item item = new Item(idItem[position], name[position], code[position], Integer.parseInt(stock[position]));
+                mListener.onClickedItem(item);
+            }
+        });
         return view;
+    }
+
+    public void onEditItem(Item item) {
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -84,5 +95,6 @@ public class ItemListFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+        void onClickedItem(Item item);
     }
 }

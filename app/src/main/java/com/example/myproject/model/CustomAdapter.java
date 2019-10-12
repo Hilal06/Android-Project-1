@@ -4,50 +4,45 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
+import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.example.myproject.R;
+import com.example.myproject.fragment.ItemListFragment;
 
-import java.util.ArrayList;
+import java.util.zip.Inflater;
 
-public class CustomAdapter extends BaseAdapter {
+public class CustomAdapter extends ArrayAdapter<String> {
+    int id[];
+    String[] name;
+    String[] barcode;
+    String[] stock;
 
-    Context context;
-    ArrayList<Item> listItem;
-    LayoutInflater inflater;
-
-    public CustomAdapter(Context context, ArrayList<Item> listItem) {
-        this.context = context;
-        this.listItem = listItem;
-        this.inflater = (LayoutInflater.from(context));
+    public CustomAdapter(Context context, int[] id, String[] name, String[] barcode, String[] stock) {
+        super(context, R.layout.item, name);
+        this.id = id;
+        this.name = name;
+        this.barcode = barcode;
+        this.stock = stock;
     }
 
+    @NonNull
     @Override
-    public int getCount() {
-        return listItem.size();
-    }
+    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+        LayoutInflater layoutInflater = (LayoutInflater) getContext().getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        convertView = layoutInflater.inflate(R.layout.item, parent, false);
 
-    @Override
-    public Object getItem(int position) {
-        return null;
-    }
+        TextView name = convertView.findViewById(R.id.textNama);
+        TextView barcode = convertView.findViewById(R.id.textCode);
+        TextView stock = convertView.findViewById(R.id.textStock);
 
-    @Override
-    public long getItemId(int position) {
-        return 0;
-    }
+        name.setText(this.name[position]);
+        barcode.setText(this.barcode[position]);
+        stock.setText(this.stock[position]);
 
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        convertView = inflater.inflate(R.layout.item, null);
-        TextView name = (TextView) convertView.findViewById(R.id.textNama);
-        TextView stock = (TextView) convertView.findViewById(R.id.textStock);
-        TextView code = (TextView) convertView.findViewById(R.id.textCode);
-
-        name.setText(listItem.get(position).getName());
-        stock.setText(String.valueOf(listItem.get(position).getStok()));
-        code.setText(listItem.get(position).getCode());
         return convertView;
     }
 }

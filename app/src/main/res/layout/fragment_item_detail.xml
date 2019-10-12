@@ -1,14 +1,163 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.ItemDetailFragment">
+    tools:context=".fragment.ItemDetailFragment" >
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="Barcode"
+        android:textColor="@color/colorDarkBlue"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline5"
+        app:layout_constraintEnd_toStartOf="@+id/guideline7"
+        app:layout_constraintHorizontal_bias="0.511"
+        app:layout_constraintStart_toStartOf="parent" />
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:text="Name"
+        android:textColor="@color/colorDarkBlue"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView7"
+        app:layout_constraintEnd_toStartOf="@+id/guideline7"
+        app:layout_constraintHorizontal_bias="0.477"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/inputName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="64dp"
+        android:layout_marginBottom="8dp"
+        android:text="Barang"
+        app:layout_constraintBottom_toTopOf="@+id/inputBarcode"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline7" />
+
+    <EditText
+        android:id="@+id/inputBarcode"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="64dp"
+        android:text="Code"
+        app:layout_constraintBottom_toTopOf="@+id/guideline5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline7" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.4" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.72" />
+
+    <Button
+        android:id="@+id/btnPlus"
+        android:layout_width="40dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="4dp"
+        android:text="+"
+        app:layout_constraintEnd_toStartOf="@+id/guideline6"
+        app:layout_constraintTop_toTopOf="@+id/guideline5" />
+
+    <Button
+        android:id="@+id/btnMin"
+        android:layout_width="40dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="4dp"
+        android:text="-"
+        app:layout_constraintStart_toStartOf="@+id/guideline7"
+        app:layout_constraintTop_toTopOf="@+id/guideline5" />
+
+    <EditText
+        android:id="@+id/countStock"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="0"
+        android:textAlignment="center"
+        android:textColor="@color/colorDarkBlue"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toStartOf="@+id/btnPlus"
+        app:layout_constraintStart_toEndOf="@+id/btnMin"
+        app:layout_constraintTop_toTopOf="@+id/guideline5" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Stock"
+        android:textColor="@color/colorDarkBlue"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline7"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline5" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.35" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:layout_marginTop="56dp"
+        android:text="EDIT STOCK DATA"
+        android:textAlignment="center"
+        android:textColor="@color/colorDarkBlue"
+        android:textSize="35dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <ImageView
+        android:id="@+id/btnBack"
+        android:layout_width="125dp"
+        android:layout_height="63dp"
+        android:layout_marginTop="32dp"
+        android:src="@drawable/ic_arrow_back_black_24dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline7"
+        app:layout_constraintHorizontal_bias="0.842"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline8" />
+
+    <ImageView
+        android:id="@+id/btnSave"
+        android:layout_width="67dp"
+        android:layout_height="63dp"
+        android:layout_marginTop="32dp"
+        android:src="@drawable/ic_save_black_24dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline6"
+        app:layout_constraintStart_toStartOf="@+id/guideline7"
+        app:layout_constraintTop_toTopOf="@+id/guideline8" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

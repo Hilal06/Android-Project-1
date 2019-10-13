@@ -42,10 +42,10 @@ public class ItemListFragment extends Fragment{
         View view = inflater.inflate(R.layout.fragment_item_list, container, false);
         ListView listItem = view.findViewById(R.id.list);
 
-        final int[] idItem = {1,2,3};
-        final String[] name = {"Nike", "Laptop", "Pencil"};
-        final String[] code = {"16266", "616244", "72654"};
-        final String[] stock = {"13", "4", "50"};
+        final int[] idItem = {1,2,3,4,5,6,7,8,9};
+        final String[] name = {"Nike", "Laptop", "Pencil", "Sari Kurma", "Tessa", "Kopikap", "Nivea Deep Clean", "Vaseline Repairing gell", "Gatsby Pomade"};
+        final String[] code = {"16266", "616244", "72654", "1244", "53134", "82663", "2532", "0946", "5513"};
+        final String[] stock = {"13", "4", "50", "20", "50", "25", "20", "45", "12"};
 
         CustomAdapter customAdapter = new CustomAdapter(this.getContext(), idItem, name, code, stock);
         listItem.setAdapter(customAdapter);

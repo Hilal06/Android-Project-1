@@ -11,10 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.myproject.R;
-import com.example.myproject.fragment.ItemListFragment;
-
-import java.util.zip.Inflater;
-
 public class CustomAdapter extends ArrayAdapter<String> {
     int id[];
     String[] name;

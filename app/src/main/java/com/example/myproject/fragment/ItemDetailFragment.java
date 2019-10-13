@@ -17,6 +17,8 @@ import android.widget.TextView;
 import com.example.myproject.R;
 import com.example.myproject.model.Item;
 
+import java.util.Objects;
+
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
@@ -43,6 +45,13 @@ public class ItemDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_item_detail, container, false);
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            this.id = bundle.getInt("ID_ITEM");
+            this.nama = bundle.getString("NAME");
+            this.barcode = bundle.getString("CODE");
+            this.stock = bundle.getInt("STOCK");
+        }
         stockView = view.findViewById(R.id.countStock);
         inputBarcode = view.findViewById(R.id.inputBarcode);
         inputName = view.findViewById(R.id.inputName);

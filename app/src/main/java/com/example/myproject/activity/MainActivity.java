@@ -2,11 +2,8 @@ package com.example.myproject.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-
 import android.net.Uri;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.widget.Toast;
 
 import com.example.myproject.R;
 import com.example.myproject.fragment.ItemDetailFragment;
@@ -14,7 +11,6 @@ import com.example.myproject.fragment.ItemListFragment;
 import com.example.myproject.fragment.LoginFragment;
 import com.example.myproject.model.Item;
 
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements
         ItemDetailFragment.OnFragmentInteractionListener,
@@ -54,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements
     public void buttonBack() {
         Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.main_frame);
         if (fragment != null) {
-            itemDetailFragment.clear();
+
         }
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.main_frame, itemListFragment)
@@ -63,12 +59,15 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void onClickedItem(Item item) {
-        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.main_frame);
-        if (fragment != null) {
-        }
-        itemDetailFragment.setData(item);
+        Bundle bundle = new Bundle();
+        bundle.putInt("ID_ITEM", item.getId());
+        bundle.putInt("STOCK", item.getStok());
+        bundle.putString("NAME", item.getName());
+        bundle.putString("CODE", item.getCode());
+        ItemDetailFragment itemDetailFragment = new ItemDetailFragment();
+        itemDetailFragment.setArguments(bundle);
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.main_frame, itemDetailFragment)
+                .replace(R.id.main_frame,itemDetailFragment)
                 .commit();
     }
 

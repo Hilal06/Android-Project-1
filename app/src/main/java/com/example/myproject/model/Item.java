@@ -1,5 +1,6 @@
 package com.example.myproject.model;
 
+
 public class Item {
     private int id;
     private String name;
@@ -47,4 +48,5 @@ public class Item {
     public void setStok(int stok) {
         this.stok = stok;
     }
+
 }

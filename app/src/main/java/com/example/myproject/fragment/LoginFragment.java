@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myproject.R;
@@ -48,6 +49,14 @@ public class LoginFragment extends Fragment {
         listUser.add(new User("Rifaul", "Rifaul"));
         listUser.add(new User("paul","paul"));
 
+        TextView signUp = view.findViewById(R.id.linkNewAccount);
+        signUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.btnRegisterClicked();
+            }
+        });
+
         Button btnSignIn = view.findViewById(R.id.btnLogin);
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,7 +64,6 @@ public class LoginFragment extends Fragment {
                 if (mListener != null) {
                     String usr = username.getText().toString();
                     String pass = password.getText().toString();
-
                     if (!TextUtils.isEmpty(usr) && !TextUtils.isEmpty(pass)) {
                         boolean cek = false;
                         for (int i=0; i<listUser.size(); i++) {
@@ -109,5 +117,6 @@ public class LoginFragment extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         void btnLoginClicked();
+        void btnRegisterClicked();
     }
 }

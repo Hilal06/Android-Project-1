@@ -46,11 +46,13 @@ public class ItemDetailFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_item_detail, container, false);
         Bundle bundle = getArguments();
+
         if (bundle != null) {
-            this.id = bundle.getInt("ID_ITEM");
-            this.nama = bundle.getString("NAME");
-            this.barcode = bundle.getString("CODE");
-            this.stock = bundle.getInt("STOCK");
+            Item item = bundle.getParcelable("DATA");
+            this.id = item.getId();
+            this.nama = item.getName();
+            this.barcode = item.getCode();
+            this.stock = item.getStok();
         }
         stockView = view.findViewById(R.id.countStock);
         inputBarcode = view.findViewById(R.id.inputBarcode);

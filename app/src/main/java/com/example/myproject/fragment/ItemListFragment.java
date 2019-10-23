@@ -4,23 +4,21 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.ListFragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.example.myproject.R;
 import com.example.myproject.model.CustomAdapter;
 import com.example.myproject.model.Item;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -31,6 +29,12 @@ import java.util.ArrayList;
 public class ItemListFragment extends Fragment{
 
     private OnFragmentInteractionListener mListener;
+
+    private String[] idItem = {"1","2","3","4","5","6","7","8","9"};
+    private String[] name = {"Nike", "Laptop", "Pencil", "Sari Kurma", "Tessa", "Kopikap", "Nivea Deep Clean", "Vaseline Repairing gell", "Gatsby Pomade"};
+    private String[] code = {"16266", "616244", "72654", "1244", "53134", "82663", "2532", "0946", "5513"};
+    private String[] stock = {"13", "4", "50", "20", "50", "25", "20", "45", "12"};
+
     public ItemListFragment() {
         // Required empty public constructor
     }
@@ -42,18 +46,21 @@ public class ItemListFragment extends Fragment{
         View view = inflater.inflate(R.layout.fragment_item_list, container, false);
         ListView listItem = view.findViewById(R.id.list);
 
-        final int[] idItem = {1,2,3,4,5,6,7,8,9};
-        final String[] name = {"Nike", "Laptop", "Pencil", "Sari Kurma", "Tessa", "Kopikap", "Nivea Deep Clean", "Vaseline Repairing gell", "Gatsby Pomade"};
-        final String[] code = {"16266", "616244", "72654", "1244", "53134", "82663", "2532", "0946", "5513"};
-        final String[] stock = {"13", "4", "50", "20", "50", "25", "20", "45", "12"};
-
-        CustomAdapter customAdapter = new CustomAdapter(this.getContext(), idItem, name, code, stock);
+        CustomAdapter customAdapter = new CustomAdapter(this.getContext(),idItem, name, code, stock);
         listItem.setAdapter(customAdapter);
         listItem.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Item item = new Item(idItem[position], name[position], code[position], Integer.parseInt(stock[position]));
+                Item item = new Item(Integer.valueOf(idItem[position]), name[position], code[position], Integer.valueOf(stock[position]));
                 mListener.onClickedItem(item);
+            }
+        });
+
+        FloatingActionButton floatingActionButton = view.findViewById(R.id.floatingAddButton);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.btnAdd();
             }
         });
         return view;
@@ -61,6 +68,21 @@ public class ItemListFragment extends Fragment{
 
     public void onEditItem(Item item) {
 
+    }
+
+    public void newItem(Item item) {
+        ArrayList<String> id = new ArrayList<>(Arrays.asList(idItem));
+        ArrayList<String> names = new ArrayList<>(Arrays.asList(name));
+        ArrayList<String> codes = new ArrayList<>(Arrays.asList(code));
+        ArrayList<String> stocks = new ArrayList<>(Arrays.asList(stock));
+        id.add(String.valueOf(id.size() + 1));
+        names.add(item.getName());
+        codes.add(item.getCode());
+        stocks.add(String.valueOf(item.getStok()));
+        this.idItem = id.toArray(new String[id.size()]);
+        this.name = names.toArray(new String[names.size()]);
+        this.code = codes.toArray(new String[codes.size()]);
+        this.stock = stocks.toArray(new String[stocks.size()]);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -96,5 +118,6 @@ public class ItemListFragment extends Fragment{
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
         void onClickedItem(Item item);
+        void btnAdd();
     }
 }

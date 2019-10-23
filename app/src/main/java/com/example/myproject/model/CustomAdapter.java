@@ -11,18 +11,21 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.myproject.R;
+
+import java.util.ArrayList;
+
 public class CustomAdapter extends ArrayAdapter<String> {
-    int id[];
+    String[] id;
     String[] name;
     String[] barcode;
     String[] stock;
 
-    public CustomAdapter(Context context, int[] id, String[] name, String[] barcode, String[] stock) {
+    public CustomAdapter(Context context, String[] id, String[] name, String[] barcode, String[] stok) {
         super(context, R.layout.item, name);
         this.id = id;
         this.name = name;
         this.barcode = barcode;
-        this.stock = stock;
+        this.stock = stok;
     }
 
     @NonNull

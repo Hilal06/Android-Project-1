@@ -23,7 +23,7 @@ public class welcomeActivity extends AppCompatActivity {
                 startActivity(new Intent(welcomeActivity.this, MainActivity.class));
                 finish();
             }
-        },3000);
+        },2000);
     }
 
 }

@@ -9,8 +9,12 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.myproject.R;
+import com.example.myproject.model.User;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -21,6 +25,7 @@ import com.example.myproject.R;
 public class RegisterFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
+    private EditText inputName, inputUsername, inputPassword;
 
     public RegisterFragment() {
         // Required empty public constructor
@@ -31,15 +36,31 @@ public class RegisterFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_register, container, false);
+        View view =  inflater.inflate(R.layout.fragment_register, container, false);
+        inputName = view.findViewById(R.id.editName);
+        inputUsername = view.findViewById(R.id.editUsername);
+        inputPassword = view.findViewById(R.id.editPassword);
+        final User user = new User();
+        Button btnRegister = view.findViewById(R.id.btnRegister);
+        btnRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!inputName.equals("") && !inputUsername.equals("") && !inputPassword.equals("") ) {
+                    if (mListener != null) {
+                        user.setName(inputName.getText().toString());
+                        user.setUsername(inputUsername.getText().toString());
+                        user.setPassword(inputPassword.getText().toString());
+                        mListener.newUser(user);
+                    }
+                } else {
+                    Toast.makeText(getActivity(), "Please Fill The Form", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
 
     @Override
     public void onAttach(Context context) {
@@ -70,6 +91,6 @@ public class RegisterFragment extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        void newUser(User user);
     }
 }

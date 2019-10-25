@@ -14,17 +14,6 @@
         android:layout_marginTop="4dp"
         android:layout_marginBottom="4dp"
         >
-        <TextView
-            android:id="@+id/textStock"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="8dp"
-            android:text="TextView"
-            android:textColor="@color/colorDarkBlue"
-            android:textSize="15dp"
-            app:layout_constraintStart_toEndOf="@+id/textview"
-            app:layout_constraintTop_toBottomOf="@+id/textNama" />
 
         <TextView
             android:id="@+id/textView2"
@@ -58,13 +47,13 @@
             android:id="@+id/textCode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="36dp"
+            android:layout_marginStart="12dp"
             android:layout_marginTop="8dp"
             android:text="TextView"
             android:textColor="@color/colorDarkBlue"
             android:textSize="15dp"
-            app:layout_constraintStart_toEndOf="@+id/textView2"
-            app:layout_constraintTop_toBottomOf="@+id/textStock" />
+            app:layout_constraintStart_toEndOf="@+id/textview"
+            app:layout_constraintTop_toBottomOf="@+id/textNama" />
 
         <TextView
             android:id="@+id/textview"
@@ -78,8 +67,19 @@
             android:textSize="15dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textNama" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <TextView
+            android:id="@+id/textStock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="8dp"
+            android:text="TextView"
+            android:textColor="@color/colorDarkBlue"
+            android:textSize="15dp"
+            app:layout_constraintStart_toEndOf="@+id/textView2"
+            app:layout_constraintTop_toBottomOf="@+id/textCode" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </androidx.cardview.widget.CardView>

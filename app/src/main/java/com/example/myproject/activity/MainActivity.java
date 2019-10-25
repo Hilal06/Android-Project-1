@@ -13,6 +13,7 @@ import com.example.myproject.fragment.ItemListFragment;
 import com.example.myproject.fragment.LoginFragment;
 import com.example.myproject.fragment.RegisterFragment;
 import com.example.myproject.model.Item;
+import com.example.myproject.model.User;
 
 
 public class MainActivity extends AppCompatActivity implements
@@ -24,23 +25,24 @@ public class MainActivity extends AppCompatActivity implements
 
     private ItemDetailFragment itemDetailFragment;
     private ItemListFragment itemListFragment;
+    private LoginFragment loginFragment;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        itemDetailFragment = new ItemDetailFragment();
-        itemListFragment = new ItemListFragment();
-
+        loginFragment = new LoginFragment();
+        loginFragment.onInitUser();
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.main_frame, new LoginFragment())
+                .replace(R.id.main_frame, loginFragment)
                 .commit();
 
     }
 
     @Override
     public void btnLoginClicked() {
+        itemListFragment = new ItemListFragment();
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.main_frame, itemListFragment)
                 .commit();
@@ -69,20 +71,34 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void buttonBack() {
-        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.main_frame);
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.main_frame, itemListFragment)
                 .commit();
     }
 
     @Override
-    public void onClickedItem(Item item) {
+    public void btnUpdateItem(int id, String name, String code, int stock, int position) {
+        Item item = new Item();
+        item.setId(id);
+        item.setName(name);
+        item.setStok(stock);
+        item.setCode(code);
+        itemListFragment.onEditItem(position, item);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.main_frame, itemListFragment)
+                .commit();
+    }
+
+    @Override
+    public void onClickedItem(int position,Item item) {
         Bundle bundle = new Bundle();
         bundle.putParcelable("DATA", item);
-        ItemDetailFragment itemDetailFragment = new ItemDetailFragment();
+        bundle.putInt("Position", position);
+        itemDetailFragment = new ItemDetailFragment();
         itemDetailFragment.setArguments(bundle);
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.main_frame,itemDetailFragment)
+                .addToBackStack(null)
                 .commit();
     }
 
@@ -95,7 +111,10 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onSave(int id, String name, String code, int stock) {
-
+    public void newUser(User user) {
+        loginFragment.addUser(user);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.main_frame, loginFragment)
+                .commit();
     }
 }

@@ -29,7 +29,7 @@ import java.util.ArrayList;
 public class LoginFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
-    private ItemListFragment listFragment;
+    private ArrayList<User> listUser;
 
     public LoginFragment() {
         // Required empty public constructor
@@ -45,9 +45,6 @@ public class LoginFragment extends Fragment {
         final EditText password = view.findViewById(R.id.txtPassword);
 
         // hardcode data user
-        final ArrayList<User> listUser = new ArrayList<User>();
-        listUser.add(new User("Rifaul", "Rifaul"));
-        listUser.add(new User("paul","paul"));
 
         TextView signUp = view.findViewById(R.id.linkNewAccount);
         signUp.setOnClickListener(new View.OnClickListener() {
@@ -68,6 +65,7 @@ public class LoginFragment extends Fragment {
                         boolean cek = false;
                         for (int i=0; i<listUser.size(); i++) {
                             if (listUser.get(i).getUsername().equals(usr) && listUser.get(i).getPassword().equals(pass)) {
+                                Toast.makeText(getActivity(), "Welcome "+listUser.get(i).getName(), Toast.LENGTH_SHORT).show();
                                 mListener.btnLoginClicked();
                                 cek = false;
                             } else {
@@ -86,7 +84,14 @@ public class LoginFragment extends Fragment {
         });
         return view;
     }
-
+    public void onInitUser(){
+        listUser = new ArrayList<>();
+        listUser.add(new User("Rifaul","Rifaul", "Rifaul"));
+        listUser.add(new User("Paul","paul","paul"));
+    }
+    public void addUser(User user){
+        listUser.add(user);
+    }
 
     @Override
     public void onAttach(Context context) {

@@ -11,12 +11,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.myproject.R;
 import com.example.myproject.model.Item;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Objects;
 
 /**
@@ -46,9 +50,9 @@ public class ItemDetailFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_item_detail, container, false);
         Bundle bundle = getArguments();
-
+        final Item item = bundle.getParcelable("DATA");
+        final int position = bundle.getInt("Position");
         if (bundle != null) {
-            Item item = bundle.getParcelable("DATA");
             this.id = item.getId();
             this.nama = item.getName();
             this.barcode = item.getCode();
@@ -65,6 +69,7 @@ public class ItemDetailFragment extends Fragment {
         Button btnPlus, btnMin;
         btnPlus = view.findViewById(R.id.btnPlus);
         btnMin = view.findViewById(R.id.btnMin);
+        ImageButton btnUpdate = view.findViewById(R.id.btnUpdateItem);
 
         ImageView btnBack = view.findViewById(R.id.btnBack);
         // Listener on click
@@ -90,14 +95,18 @@ public class ItemDetailFragment extends Fragment {
                 mListener.buttonBack();
             }
         });
-        return view;
-    }
 
-    public void setData(Item item) {
-        this.id = item.getId();
-        this.nama = item.getName();
-        this.barcode = item.getCode();
-        this.stock = item.getStok();
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int id = item.getId();
+                String nama = inputName.getText().toString();
+                String barcode = inputBarcode.getText().toString();
+                int stock = Integer.parseInt(stockView.getText().toString());
+                mListener.btnUpdateItem(id, nama, barcode, stock, position);
+            }
+        });
+        return view;
     }
 
     @Override
@@ -117,13 +126,6 @@ public class ItemDetailFragment extends Fragment {
         mListener = null;
     }
 
-    public void clear() {
-        this.id = -1;
-        this.nama = null;
-        this.stock = 0;
-        this.barcode = null;
-    }
-
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -136,8 +138,7 @@ public class ItemDetailFragment extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
         void buttonBack();
-        void onSave(int id, String name, String code, int stock);
+        void btnUpdateItem(int id, String name, String code, int stock, int postion);
     }
 }

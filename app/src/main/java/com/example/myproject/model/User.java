@@ -1,16 +1,15 @@
 package com.example.myproject.model;
 
 public class User {
+    private String name;
     private String username;
     private String password;
-    private String email;
-    private String gender;
-    private String tlp;
 
     public User() {
     }
 
-    public User(String username, String password) {
+    public User(String name,String username, String password) {
+        this.name = name;
         this.username = username;
         this.password = password;
     }
@@ -31,29 +30,11 @@ public class User {
         this.password = password;
     }
 
-    public String getEmail() {
-        return email;
+    public String getName() {
+        return name;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setName(String name) {
+        this.name = name;
     }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public String getTlp() {
-        return tlp;
-    }
-
-    public void setTlp(String tlp) {
-        this.tlp = tlp;
-    }
-
-
 }
